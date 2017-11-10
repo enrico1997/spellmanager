@@ -1,0 +1,39 @@
+body {
+  margin: 0;
+  background: url("../images/book.jpg");
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  font: 16px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+@font-face {
+  font-family: HARRYP__;
+  src: url(HARRYP__.TTF);
+}
+
+h1 {
+  font-family: HARRYP__;
+  padding-bottom: 20px;
+  font-size: 50px;
+  line-height: 49px;
+  border-bottom: 3px solid grey;
+}
+
+h2 {
+  font-size:30px;	
+}
+
+footer {
+  font-family: HARRYP__;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: purple;
+  color: white;
+  text-align: center;
+}

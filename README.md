@@ -2,7 +2,7 @@
 
 ### Overview
 
-In this assignment, you'll create a *anything* logger with MySQL, Node, Express, Handlebars and a homemade ORM (yeah!). Be sure to follow the MVC design pattern; use Node and MySQL to query and route data in your app, and Handlebars to generate your HTML.
+In this assignment, you'll create a spellbook logger with MySQL, Node, Express, Handlebars and a homemade ORM (yeah!). Be sure to follow the MVC design pattern; use Node and MySQL to query and route data in your app, and Handlebars to generate your HTML.
 
 
 ### Important
@@ -11,7 +11,7 @@ Be sure to utilize the [MYSQL Heroku Deployment Guide](../Supplemental/MySQLHero
 
 ### Before You Begin
 
-* Practice-Ur-Spells! is a Harry Potter inspired app that lets users input the names of spells they'd like to cast.
+* Standard Book of Spells! is a *Harry Potter* inspired app that lets users input the names of spells they'd like to cast.
 
 * Whenever a user submits a spell's name, your app will display the spell on the left side of the page -- waiting to be cast.
 
