@@ -4,6 +4,7 @@
 
 // Requiring mysql package
 var mysql = require("mysql");
+var connection;
 
 // Setting up our connection information
 var source = {
@@ -27,8 +28,11 @@ var source = {
 
 
 // Creating our connection
-var connection = mysql.createConnection(source.localhost);
-
+if (process.env.JAWSDB_URL) {
+  connection = mysql.createConnection(process.env.JAWSDB_URL);
+} else {
+  connection = mysql.createConnection(source.localhost);
+};
 
 // Connecting to the database.
 connection.connect(function(err) {
@@ -37,7 +41,12 @@ connection.connect(function(err) {
     return;
   }
   console.log("connected as id " + connection.threadId);
-  // @TODO: Create TABLE IF NOT EXISTS 'burgers'
+  
+  var sql = "CREATE TABLE `spells` ( `id` Int( 11 ) AUTO_INCREMENT NOT NULL, `spell_name` VARCHAR( 255 ) NOT NULL, `cast` BOOLEAN NOT NULL DEFAULT 0, `date` DATETIME NOT NULL, PRIMARY KEY ( `id` ) )";
+  con.query(sql, function (err, result) {
+    if (err) throw err;
+    console.log("Table created");
+  });
 
 });
 

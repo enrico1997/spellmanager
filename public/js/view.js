@@ -63,7 +63,7 @@ $(document).ready(function() {
     }
   }
 
-  // This function is called whenever a todo item is in edit mode and loses focus
+  // This function is called whenever a spell item is in edit mode and loses focus
   // This cancels any edits being made
   function cancelEdit() {
     var currentTodo = $(this).data("todo");
