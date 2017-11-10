@@ -43,7 +43,7 @@ connection.connect(function(err) {
   console.log("connected as id " + connection.threadId);
   
   var sql = "CREATE TABLE `spells` ( `id` Int( 11 ) AUTO_INCREMENT NOT NULL, `spell_name` VARCHAR( 255 ) NOT NULL, `cast` BOOLEAN NOT NULL DEFAULT 0, `date` DATETIME NOT NULL, PRIMARY KEY ( `id` ) )";
-  con.query(sql, function (err, result) {
+  connection.query(sql, function (err, result) {
     if (err) throw err;
     console.log("Table created");
   });
