@@ -14,15 +14,15 @@ var source = {
     user: "enrico",
     password: "",
     database: "spells_db"
-  },
+  // },
 
-  // jawsDB
-  jawsDB: {
-    port: 3306,
-    host: "<host name>",
-    user: "<name of user>",
-    password: "<password>",
-    database: "<name of database>"
+  // // jawsDB
+  // jawsDB: {
+  //   port: 3306,
+  //   host: "<host name>",
+  //   user: "<name of user>",
+  //   password: "<password>",
+  //   database: "<name of database>"
   }
 };
 
@@ -42,11 +42,11 @@ connection.connect(function(err) {
   }
   console.log("connected as id " + connection.threadId);
   
-  var sql = "CREATE TABLE `spells` ( `id` Int( 11 ) AUTO_INCREMENT NOT NULL, `spell_name` VARCHAR( 255 ) NOT NULL, `cast` BOOLEAN NOT NULL DEFAULT 0, `date` DATETIME NOT NULL, PRIMARY KEY ( `id` ) )";
-  connection.query(sql, function (err, result) {
-    if (err) throw err;
-    console.log("Table created");
-  });
+  // var sql = "CREATE TABLE `spells` ( `id` Int( 11 ) AUTO_INCREMENT NOT NULL, `spell_name` VARCHAR( 255 ) NOT NULL, `cast` BOOLEAN NOT NULL DEFAULT 0, `date` DATETIME NOT NULL, PRIMARY KEY ( `id` ) )";
+  // connection.query(sql, function (err, result) {
+  //   if (err) throw err;
+  //   console.log("Table created");
+  // });
 
 });
 

@@ -5,7 +5,7 @@ INSERT INTO `spells` (`spell_name`, `date`) VALUES ("Finestra", NOW());
 INSERT INTO `spells` (`spell_name`, `date`) VALUES ("Revelio", NOW());
 
 /* Tests to validate database created properly */
-USE `spells_db`;
+USE `qfr5j6beff03fbuv`;
 DESC `spells`;
 SELECT * FROM `spells`;
 
