@@ -3,7 +3,8 @@ $(document).ready(function() {
   var $newItemInput = $("input.new-item");
   // Our new todos will go inside the todoContainer
   var $todoContainer = $(".todo-container");
-  // Adding event listeners for deleting, editing, and adding todos
+  var $todoContainerCast = $(".todo-container1");
+  // Adding event listeners for deleting, editing, and adding spells
   $(document).on("click", "button.delete", deleteTodo);
   $(document).on("click", "button.complete", toggleComplete);
   $(document).on("click", ".todo-item", editTodo);
@@ -14,20 +15,27 @@ $(document).ready(function() {
   // Our initial todos array
   var todos = [];
 
-  // Getting todos from database when page loads
+  // Getting spells from database when page loads
   getTodos();
 
-  // This function resets the todos displayed with new todos from the database
+  // This function resets the todos displayed with new spells from the database
   function initializeRows() {
+    console.log("triggered");
     $todoContainer.empty();
     var rowsToAdd = [];
+    var rowsToAdd1 = [];
     for (var i = 0; i < todos.length; i++) {
-      rowsToAdd.push(createNewRow(todos[i]));
+      if (todos[i].cast === 0) {
+        rowsToAdd.push(createNewRow(todos[i]));
+      } else {
+        rowsToAdd1.push(createNewRowCast(todos[i]));
+      }
     }
     $todoContainer.prepend(rowsToAdd);
+    $todoContainerCast.prepend(rowsToAdd1);
   }
 
-  // This function grabs todos from the database and updates the view
+  // This function grabs spells from the database and updates the view
   function getTodos() {
     $.get("/api/todos", function(data) {
       todos = data;
@@ -112,9 +120,26 @@ $(document).ready(function() {
     $newInputRow.find("button.delete").data("id", todo.id);
     $newInputRow.find("input.edit").css("display", "none");
     $newInputRow.data("todo", todo);
-    if (todo.complete) {
-      $newInputRow.find("span").css("text-decoration", "line-through");
-    }
+    return $newInputRow;
+  }
+
+    // This function constructs a "spell that's been cast" row
+  function createNewRowCast(todo) {
+    var $newInputRow = $(
+      [
+        "<li class='list-group-item todo-item'>",
+        "<span>",
+        todo.spell_name,
+        "</span>",
+        "<input type='text' class='edit' style='display: none;'> ",
+        "<button id='deleteButton' class='delete btn btn-default'>Expelliarmus</button>",
+        "</li>"
+      ].join("")
+    );
+
+    $newInputRow.find("button.delete").data("id", todo.id);
+    $newInputRow.data("todo", todo);
+    $newInputRow.find("span").css("text-decoration", "line-through");
     return $newInputRow;
   }
 

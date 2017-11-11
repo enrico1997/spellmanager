@@ -13,21 +13,21 @@ var orm = require("../config/orm.js");
 // =============================================================
 module.exports = function(app) {
 
-  // GET route for getting all of the todos
+  // GET route for getting all of the spells
   app.get("/api/todos", function(req, res) {
     orm.getTodos(function(results) {
       res.json(results);
     });
   });
 
-  // POST route for saving a new todo. We can create a todo using the data on req.body
+  // POST route for saving a new spell. We can create a spell using the data on req.body
   app.post("/api/todos", function(req, res) {
     orm.addTodo(req.body, function(results) {
       res.json(results);
     });
   });
 
-  // DELETE route for deleting todos. We can access the ID of the todo to delete in
+  // DELETE route for deleting spells. We can access the ID of the spell to delete in
   // req.params.id
   app.delete("/api/todos/:id", function(req, res) {
     orm.deleteTodo(req.params.id, function(results) {
@@ -35,7 +35,7 @@ module.exports = function(app) {
     });
   });
 
-  // PUT route for updating todos. We can access the updated todo in req.body
+  // PUT route for updating spells. We can access the updated spell in req.body
   app.put("/api/todos", function(req, res) {
     orm.editTodo(req.body, function(results) {
       res.json(results);
