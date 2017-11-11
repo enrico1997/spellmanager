@@ -20,8 +20,8 @@ $(document).ready(function() {
 
   // This function resets the todos displayed with new spells from the database
   function initializeRows() {
-    console.log("triggered");
     $todoContainer.empty();
+    $todoContainerCast.empty();
     var rowsToAdd = [];
     var rowsToAdd1 = [];
     for (var i = 0; i < todos.length; i++) {
@@ -127,7 +127,7 @@ $(document).ready(function() {
   function createNewRowCast(todo) {
     var $newInputRow = $(
       [
-        "<li class='list-group-item todo-item'>",
+        "<li class='list-group-item todo-item animated pulse'>",
         "<span>",
         todo.spell_name,
         "</span>",
