@@ -12,12 +12,12 @@ $(document).ready(function() {
   $(document).on("submit", "#todo-form", insertTodo);
 
   // Our initial todos array
-  var spells = [];
+  var todos = [];
 
-  // Getting spells from database when page loads
+  // Getting todos from database when page loads
   getTodos();
 
-  // This function resets the spelss displayed with new spells from the database
+  // This function resets the todos displayed with new todos from the database
   function initializeRows() {
     $todoContainer.empty();
     var rowsToAdd = [];
@@ -35,20 +35,30 @@ $(document).ready(function() {
     });
   }
 
+  // This function deletes a todo when the user clicks the delete button
+  function deleteTodo(event) {
+    event.stopPropagation();
+    var id = $(this).data("id");
+    $.ajax({
+      method: "DELETE",
+      url: "/api/todos/" + id
+    }).done(getTodos);
+  }
+
   // This function handles showing the input box for a user to edit a todo
   function editTodo() {
     var currentTodo = $(this).data("todo");
     $(this).children().hide();
-    $(this).children("input.edit").val(currentTodo.text);
+    $(this).children("input.edit").val(currentTodo.spell_name);
     $(this).children("input.edit").show();
     $(this).children("input.edit").focus();
   }
 
-  // Toggles complete status
+  // Toggles "cast" status
   function toggleComplete(event) {
     event.stopPropagation();
     var todo = $(this).parent().data("todo");
-    todo.complete = !todo.complete;
+    todo.cast = 1;
     updateTodo(todo);
   }
 
@@ -57,19 +67,28 @@ $(document).ready(function() {
   function finishEdit() {
     var updatedTodo = $(this).data("todo");
     if (event.keyCode === 13) {
-      updatedTodo.text = $(this).children("input").val().trim();
+      updatedTodo.spell_name = $(this).children("input").val().trim();
       $(this).blur();
       updateTodo(updatedTodo);
     }
   }
 
-  // This function is called whenever a spell item is in edit mode and loses focus
+  // This function updates a todo in our database
+  function updateTodo(todo) {
+    $.ajax({
+      method: "PUT",
+      url: "/api/todos",
+      data: todo
+    }).done(getTodos);
+  }
+
+  // This function is called whenever a todo item is in edit mode and loses focus
   // This cancels any edits being made
   function cancelEdit() {
     var currentTodo = $(this).data("todo");
     if (currentTodo) {
       $(this).children().hide();
-      $(this).children("input.edit").val(currentTodo.text);
+      $(this).children("input.edit").val(currentTodo.spell_name);
       $(this).children("span").show();
       $(this).children("button").show();
     }
@@ -81,11 +100,11 @@ $(document).ready(function() {
       [
         "<li class='list-group-item todo-item'>",
         "<span>",
-        todo.text,
+        todo.spell_name,
         "</span>",
-        "<input type='text' class='edit' style='display: none;'>",
-        "<button class='delete btn btn-default'>x</button>",
-        "<button class='complete btn btn-default'>✓</button>",
+        "<input type='text' class='edit' style='display: none;'> ",
+        "<button id='deleteButton' class='delete btn btn-default'>Expelliarmus</button>",
+        "<button class='complete btn btn-default'>Accio</button>",
         "</li>"
       ].join("")
     );
@@ -104,7 +123,7 @@ $(document).ready(function() {
     event.preventDefault();
     var todo = {
       spell_name: $newItemInput.val().trim(),
-      cast: 0
+      complete: false
     };
 
     $.post("/api/todos", todo, getTodos);
